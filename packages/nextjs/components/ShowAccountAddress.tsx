@@ -42,13 +42,15 @@ export default function ShowAccountAddress({ serialNumber, profile }: { serialNu
         tokenAddress={process.env.NEXT_PUBLIC_TOKEN_ADDRESS}
         className="justify-center my-2"
       />
-      <TokenBalance
-        address={accountAddress}
-        symbol="ETHLDN"
-        precision={0}
-        tokenAddress={"0x9b1a0D2951b11Ac26A6cBbd5aEf2c4cb014b3B6e"}
-        className="justify-center my-2"
-      />
+      {process.env.NEXT_PUBLIC_TOKEN_ADDRESS2 && (
+        <TokenBalance
+          address={accountAddress}
+          symbol="🍺"
+          precision={0}
+          tokenAddress={process.env.NEXT_PUBLIC_TOKEN_ADDRESS2}
+          className="justify-center my-2"
+        />
+      )}
     </div>
   );
 }

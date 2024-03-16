@@ -56,12 +56,11 @@ export const TokenBalance = ({
   }
 
   const balance = Number(fetchedBalanceData) / 10 ** 6;
-
   return (
     <div className={`w-full flex items-baseline justify-center mx-auto my-8 text-6xl ${className}`}>
       <div>
         <span className="">{balance?.toFixed(precision)}</span>
-        <span className="text-lg text-[1.5em] font-bold ml-1">{symbol}</span>
+        <span className={`${symbol.length < 3 ? "text-4xl" : "text-lg"} font-bold ml-1`}>{symbol}</span>
       </div>
     </div>
   );
