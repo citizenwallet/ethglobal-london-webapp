@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import NFCReader from "@/components/NFCReader";
 import ShowAccountAddress from "@/components/ShowAccountAddress";
 import { WagmiConfig } from "wagmi";
@@ -46,11 +47,18 @@ export default function Reader() {
   return (
     <div>
       <WagmiConfig config={wagmiConfig}>
-        <h1>NFC Wallet</h1>
+        {!serialNumber && (
+          <Image
+            src="/nfcwallet-logo.png"
+            alt="NFC Wallet"
+            width="300"
+            height="124"
+            className={`mx-auto ${serialNumber ? "my-4" : "my-20"}`}
+          />
+        )}
         <div>
-          {profile && <h2>{profile.user.name}</h2>}
           {/* <p>Serial Number: {serialNumber}</p> */}
-          {serialNumber && <ShowAccountAddress avatarUrl={profile?.user.avatar.fullUrl} serialNumber={serialNumber} />}
+          {serialNumber && <ShowAccountAddress profile={profile} serialNumber={serialNumber} />}
         </div>
         <NFCReader onChange={handleNFCData} />
       </WagmiConfig>

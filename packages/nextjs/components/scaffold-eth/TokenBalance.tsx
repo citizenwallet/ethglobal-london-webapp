@@ -9,12 +9,19 @@ type BalanceProps = {
   tokenAddress?: Address;
   className?: string;
   symbol?: string;
+  precision?: number;
 };
 
 /**
  * Display (ETH & USD) balance of an ETH address.
  */
-export const TokenBalance = ({ address = "", tokenAddress, symbol = "", className = "" }: BalanceProps) => {
+export const TokenBalance = ({
+  precision = 2,
+  address = "",
+  tokenAddress = "",
+  symbol = "",
+  className = "",
+}: BalanceProps) => {
   const {
     data: fetchedBalanceData,
     isError,
@@ -51,10 +58,10 @@ export const TokenBalance = ({ address = "", tokenAddress, symbol = "", classNam
   const balance = Number(fetchedBalanceData) / 10 ** 6;
 
   return (
-    <div className={`w-full flex items-baseline justify-center mx-auto my-8 ${className}`}>
+    <div className={`w-full flex items-baseline justify-center mx-auto my-8 text-6xl ${className}`}>
       <div>
-        <span className="text-6xl">{balance?.toFixed(2)}</span>
-        <span className="text-[1.5em] font-bold ml-1">{symbol}</span>
+        <span className="">{balance?.toFixed(precision)}</span>
+        <span className="text-lg text-[1.5em] font-bold ml-1">{symbol}</span>
       </div>
     </div>
   );

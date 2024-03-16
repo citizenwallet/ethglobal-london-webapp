@@ -6,7 +6,7 @@ import { Address, TokenBalance } from "~~/components/scaffold-eth";
 import { useScaffoldContractRead } from "~~/hooks/scaffold-eth";
 import { getHash } from "~~/utils/crypto";
 
-export default function ShowAccountAddress({ serialNumber, avatarUrl }: { serialNumber: string; avatarUrl?: string }) {
+export default function ShowAccountAddress({ serialNumber, profile }: { serialNumber: string; profile?: any }) {
   const hash = getHash(
     serialNumber,
     BigInt(process.env.NEXT_PUBLIC_CHAIN_ID || 0),
@@ -19,9 +19,15 @@ export default function ShowAccountAddress({ serialNumber, avatarUrl }: { serial
     args: [hash as `0x${string}`],
   });
 
+  const avatarUrl = profile?.user ? profile.user.avatar.fullUrl : "/nfcwallet-icon.jpg";
+
   return (
     <div>
-      <div className="flex flex-row">
+      <div className="text-center my-8">
+        {profile?.user && <h1>{profile.user.name}</h1>}
+        <Address address={accountAddress} format="short" className="justify-center my-2" />
+      </div>
+      <div className="flex flex-row my-14">
         <div className="w-1/2">{avatarUrl && <Image src={avatarUrl} alt="avatar" width="300" height="300" />}</div>
         <div className="w-1/2">
           {accountAddress && (
@@ -29,16 +35,17 @@ export default function ShowAccountAddress({ serialNumber, avatarUrl }: { serial
           )}
         </div>
       </div>
-      <Address address={accountAddress} format="short" className="justify-center my-2" />
       <TokenBalance
         address={accountAddress}
         symbol="USDC"
+        precision={2}
         tokenAddress={process.env.NEXT_PUBLIC_TOKEN_ADDRESS}
         className="justify-center my-2"
       />
       <TokenBalance
         address={accountAddress}
         symbol="ETHLDN"
+        precision={0}
         tokenAddress={"0x9b1a0D2951b11Ac26A6cBbd5aEf2c4cb014b3B6e"}
         className="justify-center my-2"
       />

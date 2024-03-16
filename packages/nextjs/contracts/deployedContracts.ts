@@ -7,7 +7,7 @@ import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 const deployedContracts = {
   84532: {
     CardManager: {
-      address: "0x51Ef5Add405CCF63c206A80AF8c2B3cEE0282830",
+      address: "0xcA0a75EF803a364C83c5EAE7Eb889aE7419c9dF2",
       abi: [
         {
           inputs: [
