@@ -11,8 +11,11 @@ const imageUrl = `${baseUrl}/thumbnail.jpg`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
-  title: "Block Explorer",
-  description: "Block Explorer created with 🏗 Scaffold-ETH 2",
+  title: {
+    default: "Scaffold-ETH 2 App",
+    template: "%s | Scaffold-ETH 2",
+  },
+  description: "Built with 🏗 Scaffold-ETH 2",
   openGraph: {
     title: {
       default: "Scaffold-ETH 2 App",
