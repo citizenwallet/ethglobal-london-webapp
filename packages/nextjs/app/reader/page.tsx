@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import Image from "next/image";
 import NFCReader from "@/components/NFCReader";
 import ShowAccountAddress from "@/components/ShowAccountAddress";
 import { WagmiConfig } from "wagmi";
@@ -17,7 +16,7 @@ interface Profile {
 }
 
 export default function Reader() {
-  const [urlRecord, setUrlRecord] = useState("");
+  // const [urlRecord, setUrlRecord] = useState("");
   const [profile, setProfile] = useState<Profile | null>(null);
   const [serialNumber, setSerialNumber] = useState("");
 
@@ -37,7 +36,7 @@ export default function Reader() {
       console.log("Record data:  " + textDecoder.decode(record.data));
       if (record.recordType === "url") {
         const urlstr = textDecoder.decode(record.data);
-        setUrlRecord(urlstr);
+        // setUrlRecord(urlstr);
         const profileId = urlstr.substring(urlstr.lastIndexOf("/") + 1);
         fetchProfile(profileId);
       }
@@ -47,17 +46,11 @@ export default function Reader() {
   return (
     <div>
       <WagmiConfig config={wagmiConfig}>
-        <h1>Read NFC tag</h1>
+        <h1>NFC Wallet</h1>
         <div>
           {profile && <h2>{profile.user.name}</h2>}
-          {profile && profile.user.avatar && (
-            <Image src={profile.user.avatar.fullUrl} alt="avatar" width="300" height="300" />
-          )}
-          <p>Serial Number: {serialNumber}</p>
-          <p>
-            URL: <a href={urlRecord}>{urlRecord}</a>
-          </p>
-          {serialNumber && <ShowAccountAddress serialNumber={serialNumber} />}
+          {/* <p>Serial Number: {serialNumber}</p> */}
+          {serialNumber && <ShowAccountAddress avatarUrl={profile?.user.avatar.fullUrl} serialNumber={serialNumber} />}
         </div>
         <NFCReader onChange={handleNFCData} />
       </WagmiConfig>

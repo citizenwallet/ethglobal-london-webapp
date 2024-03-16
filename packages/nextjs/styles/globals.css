@@ -30,3 +30,11 @@ p {
 .btn.btn-ghost {
   @apply shadow-none;
 }
+
+h1 {
+  @apply text-3xl mx-2 my-4;
+}
+
+h2 {
+  @apply text-2xl mx-2 my-4;
+}

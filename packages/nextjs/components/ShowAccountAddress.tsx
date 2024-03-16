@@ -1,10 +1,12 @@
 "use client";
 
+import Image from "next/image";
 import QRCode from "react-qr-code";
+import { Address, TokenBalance } from "~~/components/scaffold-eth";
 import { useScaffoldContractRead } from "~~/hooks/scaffold-eth";
 import { getHash } from "~~/utils/crypto";
 
-export default function ShowAccountAddress({ serialNumber }: { serialNumber: string }) {
+export default function ShowAccountAddress({ serialNumber, avatarUrl }: { serialNumber: string; avatarUrl?: string }) {
   const hash = getHash(
     serialNumber,
     BigInt(process.env.NEXT_PUBLIC_CHAIN_ID || 0),
@@ -19,9 +21,27 @@ export default function ShowAccountAddress({ serialNumber }: { serialNumber: str
 
   return (
     <div>
-      <h2>Account Address</h2>
-      <p>{accountAddress}</p>
-      {accountAddress && <QRCode value={accountAddress} />}
+      <div className="flex flex-row">
+        <div className="w-1/2">{avatarUrl && <Image src={avatarUrl} alt="avatar" width="300" height="300" />}</div>
+        <div className="w-1/2">
+          {accountAddress && (
+            <QRCode value={accountAddress} size={256} style={{ height: "auto", maxWidth: "100%", width: "100%" }} />
+          )}
+        </div>
+      </div>
+      <Address address={accountAddress} format="short" className="justify-center my-2" />
+      <TokenBalance
+        address={accountAddress}
+        symbol="USDC"
+        tokenAddress={process.env.NEXT_PUBLIC_TOKEN_ADDRESS}
+        className="justify-center my-2"
+      />
+      <TokenBalance
+        address={accountAddress}
+        symbol="ETHLDN"
+        tokenAddress={"0x9b1a0D2951b11Ac26A6cBbd5aEf2c4cb014b3B6e"}
+        className="justify-center my-2"
+      />
     </div>
   );
 }

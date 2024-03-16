@@ -16,6 +16,7 @@ type AddressProps = {
   disableAddressLink?: boolean;
   format?: "short" | "long";
   size?: "xs" | "sm" | "base" | "lg" | "xl" | "2xl" | "3xl";
+  className?: string;
 };
 
 const blockieSizeMap = {
@@ -31,7 +32,7 @@ const blockieSizeMap = {
 /**
  * Displays an address (or ENS) with a Blockie image and option to copy address.
  */
-export const Address = ({ address, disableAddressLink, format, size = "base" }: AddressProps) => {
+export const Address = ({ address, disableAddressLink, format, size = "base", className }: AddressProps) => {
   const [ens, setEns] = useState<string | null>();
   const [ensAvatar, setEnsAvatar] = useState<string | null>();
   const [addressCopied, setAddressCopied] = useState(false);
@@ -86,7 +87,7 @@ export const Address = ({ address, disableAddressLink, format, size = "base" }: 
   }
 
   return (
-    <div className="flex items-center">
+    <div className={`flex items-center ${className}`}>
       <div className="flex-shrink-0">
         <BlockieAvatar
           address={checkSumAddress}

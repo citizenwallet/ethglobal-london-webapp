@@ -44,10 +44,14 @@ const Scan = ({ onChange }: { onChange: (event: NDEFReadingEvent) => any }) => {
   }, [scan]);
 
   return (
-    <>
-      {nfcAvailable && !scanning && <button onClick={startScanner}>Start scanning</button>}
-      {!nfcAvailable && <p>NFC not available</p>}
-    </>
+    <center>
+      {nfcAvailable && !scanning && (
+        <button className="btn btn-primary w-64 rounded-md" onClick={startScanner}>
+          Start scanning
+        </button>
+      )}
+      {!nfcAvailable && <button className="btn disabled btn-primary w-64 rounded-md">NFC not available</button>}
+    </center>
   );
 };
 
