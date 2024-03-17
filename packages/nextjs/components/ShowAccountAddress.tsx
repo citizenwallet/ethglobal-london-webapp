@@ -35,13 +35,15 @@ export default function ShowAccountAddress({ serialNumber, profile }: { serialNu
           )}
         </div>
       </div>
-      <TokenBalance
-        address={accountAddress}
-        symbol="USDC"
-        precision={2}
-        tokenAddress={process.env.NEXT_PUBLIC_TOKEN_ADDRESS}
-        className="justify-center my-2"
-      />
+      {process.env.NEXT_PUBLIC_TOKEN_ADDRESS && (
+        <TokenBalance
+          address={accountAddress}
+          symbol="USDC"
+          precision={2}
+          tokenAddress={process.env.NEXT_PUBLIC_TOKEN_ADDRESS}
+          className="justify-center my-2"
+        />
+      )}
       {process.env.NEXT_PUBLIC_TOKEN_ADDRESS2 && (
         <TokenBalance
           address={accountAddress}

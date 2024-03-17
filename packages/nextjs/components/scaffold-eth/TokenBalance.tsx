@@ -4,9 +4,9 @@ import { Address } from "viem";
 import { useContractRead } from "wagmi";
 import { erc20ABI } from "wagmi";
 
-type BalanceProps = {
-  address?: Address;
-  tokenAddress?: Address;
+type TokenBalanceProps = {
+  address: Address;
+  tokenAddress: Address;
   className?: string;
   symbol?: string;
   precision?: number;
@@ -17,11 +17,11 @@ type BalanceProps = {
  */
 export const TokenBalance = ({
   precision = 2,
-  address = "",
-  tokenAddress = "",
+  address,
+  tokenAddress,
   symbol = "",
   className = "",
-}: BalanceProps) => {
+}: TokenBalanceProps) => {
   const {
     data: fetchedBalanceData,
     isError,
