@@ -10,7 +10,7 @@ export default function ShowAccountAddress({ serialNumber, profile }: { serialNu
   const hash = getHash(
     serialNumber,
     BigInt(process.env.NEXT_PUBLIC_CHAIN_ID || 0),
-    process.env.NEXT_PUBLIC_CONTRACT_ADDRESS || "",
+    process.env.NEXT_PUBLIC_CARDMANAGER_CONTRACT_ADDRESS || "",
   );
 
   const { data: accountAddress } = useScaffoldContractRead({
