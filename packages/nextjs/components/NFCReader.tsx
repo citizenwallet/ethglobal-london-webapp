@@ -70,7 +70,15 @@ const Scan = ({ onChange }: { onChange: (event: NDEFReadingEvent) => any }) => {
           <div className="pb-4">{scanning ? "Scanning..." : "Start scanning"}</div>
         </button>
       )}
-      {!nfcAvailable && <button className="btn disabled btn-primary w-64 rounded-md">NFC not available</button>}
+      {!nfcAvailable && (
+        <center>
+          <button className="btn disabled btn-primary w-64 rounded-md">NFC not available on this device</button>
+          <div className="text-sm my-2">
+            Requires Chrome on Android (
+            <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_NFC_API#browser_compatibility">more info</a>)
+          </div>
+        </center>
+      )}
     </center>
   );
 };
